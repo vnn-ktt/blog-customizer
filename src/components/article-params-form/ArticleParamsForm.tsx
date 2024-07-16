@@ -1,13 +1,25 @@
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
+import { clsx } from 'clsx';
 
 import styles from './ArticleParamsForm.module.scss';
 
-export const ArticleParamsForm = () => {
+type ArticleParamsFormProps = {
+	isOpen: boolean;
+	toggleForm: () => void;
+};
+
+export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
+	const { isOpen, toggleForm } = props;
+
+	const formStyles = clsx(styles.container, {
+		[styles.container_open]: isOpen,
+	});
+
 	return (
 		<>
-			<ArrowButton />
-			<aside className={styles.container}>
+			<ArrowButton isOpen={isOpen} toggleForm={toggleForm} />
+			<aside className={formStyles}>
 				<form className={styles.form}>
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
