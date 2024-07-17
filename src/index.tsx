@@ -13,24 +13,16 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleForm = () => {
-		setIsOpen(!isOpen);
-	};
-
+	const [articleState, setArticleState] = useState({
+		'--font-family': defaultArticleState.fontFamilyOption.value,
+		'--font-size': defaultArticleState.fontSizeOption.value,
+		'--font-color': defaultArticleState.fontColor.value,
+		'--container-width': defaultArticleState.contentWidth.value,
+		'--bg-color': defaultArticleState.backgroundColor.value,
+	} as CSSProperties);
 	return (
-		<div
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
-				} as CSSProperties
-			}>
-			<ArticleParamsForm isOpen={isOpen} toggleForm={toggleForm} />
+		<div className={clsx(styles.main)} style={articleState}>
+			<ArticleParamsForm setArticleState={setArticleState} />
 			<Article />
 		</div>
 	);
