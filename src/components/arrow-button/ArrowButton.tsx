@@ -6,17 +6,17 @@ import { clsx } from 'clsx';
 export type OnClick = () => void;
 
 type ArrowButtonProps = {
-	isOpen: boolean;
+	isMenuOpen: boolean;
 	toggleForm: OnClick;
 };
 
-export const ArrowButton = ({ isOpen, toggleForm }: ArrowButtonProps) => {
+export const ArrowButton = ({ isMenuOpen, toggleForm }: ArrowButtonProps) => {
 	const arrowStyles = clsx(styles.container, {
-		[styles.container_open]: isOpen,
+		[styles.container_open]: isMenuOpen,
 	});
 
 	const arrowIconStyles = clsx(styles.arrow, {
-		[styles.arrow_open]: isOpen,
+		[styles.arrow_open]: isMenuOpen,
 	});
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */

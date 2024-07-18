@@ -16,7 +16,7 @@ export const ArrowButtonStory: Story = {
 		};
 		return (
 			<>
-				<ArrowButton isOpen={false} toggleForm={handleClick} />
+				<ArrowButton isMenuOpen={false} toggleForm={handleClick} />
 			</>
 		);
 	},

@@ -1,4 +1,5 @@
-import { useState, CSSProperties } from 'react';
+import { useState, useRef, CSSProperties } from 'react';
+import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 import clsx from 'clsx';
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
@@ -25,15 +26,18 @@ type ArticleParamsFormProps = {
 export const ArticleParamsForm = ({
 	setArticleState,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [formState, setFormState] = useState(defaultArticleState);
+	const rootRef = useRef<HTMLElement>(null);
 
 	const toggleForm = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
+	useOutsideClickClose({ isMenuOpen, rootRef, onClose: toggleForm });
+
 	const formStyles = clsx(styles.container, {
-		[styles.container_open]: isOpen,
+		[styles.container_open]: isMenuOpen,
 	});
 
 	const handleSelectChange = (
@@ -70,8 +74,8 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} toggleForm={toggleForm} />
-			<aside className={formStyles}>
+			<ArrowButton isMenuOpen={isMenuOpen} toggleForm={toggleForm} />
+			<aside className={formStyles} ref={rootRef}>
 				<form
 					className={styles.form}
 					onReset={handleReset}
